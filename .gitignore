@@ -6,6 +6,5 @@ __pycache__/
 data/
 outputs/
 
-models/*.keras
 models/*.h5
 models/*.pkl
