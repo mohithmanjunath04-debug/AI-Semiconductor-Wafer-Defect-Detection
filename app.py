@@ -41,30 +41,41 @@ with st.sidebar:
 
     st.title("🤖 AI Wafer Inspector")
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.success("✅ CNN Model Loaded")
+st.success("✅ CNN Model Loaded")
+
+# Dataset Information
+if df is not None and df_clean is not None:
 
     st.metric(
         "📂 Dataset Size",
-        len(df_clean)
+        f"{len(df_clean) if df_clean is not None else 0:,}"
+
     )
+
+else:
 
     st.metric(
-        "🏷️ Defect Classes",
-        len(encoder.classes_)
+        "📂 Dataset Size",
+        "Unavailable on Cloud"
     )
 
-    st.metric(
-        "🧠 CNN Input Size",
-        "32 × 32"
-    )
+st.metric(
+    "🏷️ Defect Classes",
+    f"{len(encoder.classes_) if encoder is not None else 0}"
+)
 
-    st.markdown("---")
+st.metric(
+    "🧠 CNN Input Size",
+    "32 × 32"
+)
 
-    st.write("### 📌 Project")
+st.markdown("---")
 
-    st.info("""
+st.write("### 📌 Project")
+
+st.info("""
 **Technology Stack**
 
 • Python
@@ -78,20 +89,19 @@ with st.sidebar:
 • LSWMD Dataset
 """)
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.write("### 📌 Version")
-    st.write("v1.0")
+st.write("### 📌 Version")
+st.write("v1.0")
 
-    st.write("### 👨‍💻 Developed By")
-    st.write("Mohith Manjunath")
+st.write("### 👨‍💻 Developed By")
+st.write("Mohith Manjunath")
 
-    st.markdown("---")
+st.markdown("---")
 
-    st.caption(
-        "AI Semiconductor Wafer Defect Detection using CNN + Explainable AI"
-    )
-
+st.caption(
+    "AI Semiconductor Wafer Defect Detection using CNN + Explainable AI"
+)
 # ==========================================
 # Title
 # ==========================================
@@ -115,8 +125,6 @@ st.markdown("""
 
 This application detects semiconductor wafer defects using a trained
 Convolutional Neural Network (CNN).
-
----
 """)
 
 st.info("""
@@ -133,7 +141,6 @@ reducing inspection time, and minimizing production costs.
 # ==========================================
 # Load Model
 # ==========================================
-
 model, encoder = load_cnn_model()
 print(type(model))
 print(model.inputs)
@@ -161,7 +168,7 @@ df, df_clean = load_dataset()
 with col1:
     st.metric(
         "📦 Labelled Wafers",
-        f"{len(df_clean):,}"
+        f"{len(df_clean) if df_clean is not None else 0:,}"
     )
 
 with col2:
@@ -216,19 +223,19 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.metric(
         "📦 Total Wafers",
-        f"{len(df):,}"
+        f"{len(df) if df is not None else 0 if df is not None else 0:,}"
     )
 
 with c2:
     st.metric(
         "🎯 Defect Samples",
-        f"{len(df_clean):,}"
+        f"{len(df_clean) if df_clean is not None else 0:,}"
     )
 
 with c3:
     st.metric(
         "🧠 CNN Classes",
-        len(class_names)
+        f"{len(class_names) if class_names is not None else 0}"
     )
 
 with c4:
@@ -269,13 +276,20 @@ st.write(
     "Select any wafer from the dataset to compare the **actual defect** with the **CNN prediction**."
 )
 
-wafer_index = st.slider(
-    "🔍 Select a Wafer Sample",
-    min_value=0,
-    max_value=len(df_clean) - 1,
-    value=0,
-    step=1
-)
+if df_clean is not None:
+
+    wafer_index = st.slider(
+        "🔍 Select a Wafer Sample",
+        min_value=0,
+        max_value=len(df_clean) - 1,
+        value=0,
+        step=1
+    )
+
+else:
+
+    st.warning("⚠ Dataset not available on Streamlit Cloud.")
+    st.stop()
 
 st.caption(f"Currently Viewing Wafer #{wafer_index}")
 # -----------------------------------
@@ -367,13 +381,13 @@ c1, c2, c3 = st.columns(3)
 with c1:
     st.metric(
         "📂 Total Wafers",
-        len(df_clean)
+        f"{len(df_clean) if df_clean is not None else 0:,}"
     )
 
 with c2:
     st.metric(
         "🏷️ Defect Classes",
-        len(encoder.classes_)
+        f"{len(encoder.classes_) if encoder is not None else 0}"
     )
 
 with c3:
