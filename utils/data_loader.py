@@ -6,7 +6,7 @@ import os
 @st.cache_data
 def load_dataset():
 
-    dataset_path = "data/LSWMD.pkl"
+    dataset_path = "data/LSWMD_sample.pkl"
 
     # If dataset is available (local machine)
     if os.path.exists(dataset_path):
