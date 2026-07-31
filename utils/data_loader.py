@@ -1,14 +1,16 @@
+import os
 import pandas as pd
 import streamlit as st
-import os
-
 
 @st.cache_data
 def load_dataset():
 
     dataset_path = "data/LSWMD_sample.pkl"
 
-    # If dataset is available (local machine)
+    st.write("Current working directory:", os.getcwd())
+    st.write("Dataset path:", dataset_path)
+    st.write("Dataset exists:", os.path.exists(dataset_path))
+
     if os.path.exists(dataset_path):
 
         df = pd.read_pickle(dataset_path)
@@ -25,9 +27,5 @@ def load_dataset():
 
         return df, df_clean
 
-    # Streamlit Cloud (dataset not present)
-    else:
-
-        st.warning("Training dataset not available on Streamlit Cloud.")
-
-        return None, None
+    st.warning("Training dataset not available on Streamlit Cloud.")
+    return None, None
