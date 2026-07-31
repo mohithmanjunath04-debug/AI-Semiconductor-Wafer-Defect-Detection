@@ -616,16 +616,13 @@ st.plotly_chart(fig, use_container_width=True)
 st.markdown("---")
 
 st.header("📈 Model Evaluation")
-accuracy = report_df.loc["accuracy"][0]
+accuracy = report_df.loc["accuracy", "precision"]
 
-accuracy = report_df.loc["accuracy"][0]
+precision = report_df.loc["weighted avg", "precision"]
 
-precision = report_df.loc["weighted avg"]["precision"]
+recall = report_df.loc["weighted avg", "recall"]
 
-recall = report_df.loc["weighted avg"]["recall"]
-
-f1 = report_df.loc["weighted avg"]["f1-score"]
-
+f1 = report_df.loc["weighted avg", "f1-score"]
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
