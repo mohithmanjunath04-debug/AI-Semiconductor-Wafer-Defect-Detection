@@ -18,15 +18,15 @@ from utils.data_loader import load_dataset
 # ==========================================
 # Load Model & Dataset
 # ==========================================
-
 model, encoder = load_cnn_model()
-df_clean = load_dataset()
+df, df_clean = load_dataset()
 
 st.set_page_config(
     page_title="AI Wafer Defect Detector",
     page_icon="🤖",
     layout="wide"
 )
+
 
 # ==========================================
 # Sidebar
