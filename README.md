@@ -10,7 +10,7 @@ The application is deployed using Streamlit and integrates Explainable AI (Grad-
 
 ## 🌐 Live Demo
 
-🔗 https://YOUR-STREAMLIT-APP.streamlit.app
+🔗 https://ai-semiconductor-defect-detection.streamlit.app/
 
 ## 💻 GitHub Repository
 
